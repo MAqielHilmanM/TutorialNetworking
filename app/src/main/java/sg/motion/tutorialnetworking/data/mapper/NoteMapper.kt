@@ -7,14 +7,14 @@ import sg.motion.tutorialnetworking.data.model.Note
 fun NoteResponseDto.toModel() = Note(
     id = this.id,
     content = this.content,
-    userId = this.userId,
+    authorName = this.authorName,
     createdAt = this.createdAt,
     updatedAt = this.updatedAt,
 )
 
 fun Note.toRequestDto() = NoteRequestDto(
     content = this.content,
-    userId = this.userId,
+    authorName = this.authorName,
     createdAt = this.createdAt,
     updatedAt = this.updatedAt,
 )

@@ -33,16 +33,14 @@ import java.util.Date
 fun NoteFormBottomSheet(
     oldNote: Note = Note(),
     isEditing: Boolean = false,
-    initialAuthorName: String = "",
-    initialContent: String = "",
     onSave: (Note) -> Unit,
     onDismiss: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState()
 
-    var authorName by remember { mutableStateOf(initialAuthorName) }
-    var content by remember { mutableStateOf(initialContent) }
+    var authorName by remember { mutableStateOf(oldNote.authorName ?: "") }
+    var content by remember { mutableStateOf(oldNote.content ?: "") }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -82,7 +80,7 @@ fun NoteFormBottomSheet(
                     scope.launch {
                         onSave(oldNote.copy(
                             content = content,
-                            userId = authorName,
+                            authorName = authorName,
                             updatedAt = Date().getCurrentTimeStampWithFormat()
                         ))
                         sheetState.hide()

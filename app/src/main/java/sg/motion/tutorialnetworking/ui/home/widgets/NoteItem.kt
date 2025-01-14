@@ -1,5 +1,7 @@
 package sg.motion.tutorialnetworking.ui.home.widgets
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -37,15 +39,28 @@ fun NoteItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Note Content
-            Text(
-                text = note.content ?: "-",
-                modifier = Modifier.weight(1f),
-                style = MaterialTheme.typography.bodyMedium
-            )
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.SpaceEvenly
+            ) {
+
+                // Note Content
+                Text(
+                    text = note.content ?: "-",
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+                // Note Author
+                Text(
+                    text = ("by. " + note.authorName),
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
 
             // Delete Button
-            IconButton(onClick = { onDelete(note) }) {
+            IconButton(
+                onClick = { onDelete(note) }) {
                 Icon(
                     Icons.Default.Delete,
                     contentDescription = "Delete Note",
