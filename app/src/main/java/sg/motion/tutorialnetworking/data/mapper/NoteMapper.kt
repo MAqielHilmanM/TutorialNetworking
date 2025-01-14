@@ -5,16 +5,9 @@ import sg.motion.tutorialnetworking.data.data_source.remote.dto.NoteResponseDto
 import sg.motion.tutorialnetworking.data.model.Note
 
 fun NoteResponseDto.toModel() = Note(
-    id = this.id,
-    content = this.content,
-    authorName = this.authorName,
-    createdAt = this.createdAt,
-    updatedAt = this.updatedAt,
+    // TODO : update this mapper from NoteResponseDto to Note
 )
 
 fun Note.toRequestDto() = NoteRequestDto(
-    content = this.content,
-    authorName = this.authorName,
-    createdAt = this.createdAt,
-    updatedAt = this.updatedAt,
+    // TODO : update this mapper from Note to NoteRequestDto
 )

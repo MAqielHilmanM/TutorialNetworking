@@ -25,12 +25,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
-import sg.motion.tutorialnetworking.core.utils.getCurrentTimeStampWithFormat
 import sg.motion.tutorialnetworking.data.model.Note
-import sg.motion.tutorialnetworking.data.repository.NotesRepository
 import sg.motion.tutorialnetworking.ui.home.widgets.NoteFormBottomSheet
 import sg.motion.tutorialnetworking.ui.home.widgets.NoteItem
-import java.util.Date
 
 // Home Screen with Bottom Navigation
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,7 +41,6 @@ fun HomeScreen(navController: NavController) {
     var isEditing by remember { mutableStateOf(false) }
 
     // TODO : init notes repository here !
-    val notesRepository = remember { NotesRepository() }
 
     // Coroutine scope for async operations
     val scope = rememberCoroutineScope()
@@ -52,18 +48,14 @@ fun HomeScreen(navController: NavController) {
     // Function to load all data
     suspend fun loadAllData() {
         selectedNotes = Note()
-        notesRepository.getAllNotes().onSuccess { value ->
-            notes = value
-        }.onFailure { exception ->
-            errorMessage = exception.message ?: "error"
-        }
+
+        // TODO: call get all notes here!
     }
 
-    // Collect notes
+    // Collect notes for first time
     LaunchedEffect(Unit) {
-        // TODO : Load all note
         scope.launch {
-            loadAllData()
+            // TODO : call load all data here!
         }
     }
 
@@ -116,11 +108,7 @@ fun HomeScreen(navController: NavController) {
                         },
                         onDelete = {
                             scope.launch {
-                                notesRepository.deleteNote(note.id.orEmpty()).onSuccess { value ->
-                                    loadAllData()
-                                }.onFailure { exception ->
-                                    errorMessage = exception.message ?: "error"
-                                }
+                                // TODO: Call delete note here!
                             }
                         }
                     )
@@ -135,21 +123,9 @@ fun HomeScreen(navController: NavController) {
                 onSave = { note ->
                     scope.launch {
                         if (isEditing) {
-                            notesRepository.updateNoteWithPut(note).onSuccess { value ->
-                                loadAllData()
-                            }.onFailure { exception ->
-                                errorMessage = exception.message ?: "error"
-                            }
+                            // TODO: Call update Note here!
                         } else {
-                            notesRepository.createNote(
-                                note.copy(
-                                    createdAt = Date().getCurrentTimeStampWithFormat()
-                                )
-                            ).onSuccess { value ->
-                                loadAllData()
-                            }.onFailure { exception ->
-                                errorMessage = exception.message ?: "error"
-                            }
+                            // TODO: Call create new Note here!
                         }
                     }
                 },

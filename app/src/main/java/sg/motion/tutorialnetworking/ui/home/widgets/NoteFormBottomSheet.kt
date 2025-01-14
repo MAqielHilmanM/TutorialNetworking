@@ -3,11 +3,9 @@ package sg.motion.tutorialnetworking.ui.home.widgets
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -24,9 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
-import sg.motion.tutorialnetworking.core.utils.getCurrentTimeStampWithFormat
 import sg.motion.tutorialnetworking.data.model.Note
-import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -78,11 +74,7 @@ fun NoteFormBottomSheet(
             Button(
                 onClick = {
                     scope.launch {
-                        onSave(oldNote.copy(
-                            content = content,
-                            authorName = authorName,
-                            updatedAt = Date().getCurrentTimeStampWithFormat()
-                        ))
+                        onSave(oldNote)
                         sheetState.hide()
                         onDismiss()
                     }
