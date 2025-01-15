@@ -22,7 +22,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import sg.motion.tutorialnetworking.core.utils.getCurrentTimeStampWithFormat
 import sg.motion.tutorialnetworking.data.model.Note
+import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,7 +76,11 @@ fun NoteFormBottomSheet(
             Button(
                 onClick = {
                     scope.launch {
-                        onSave(oldNote)
+                        onSave(oldNote.copy(
+                            authorName = authorName,
+                            content = content,
+                            updatedAt = Date().getCurrentTimeStampWithFormat()
+                        ))
                         sheetState.hide()
                         onDismiss()
                     }
