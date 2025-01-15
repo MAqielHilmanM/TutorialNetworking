@@ -74,7 +74,11 @@ fun NoteFormBottomSheet(
             Button(
                 onClick = {
                     scope.launch {
-                        onSave(oldNote)
+                        onSave(oldNote.copy(
+                            authorName = authorName,
+                            content = content,
+                            createdAt = Date().getCurrentTimeStampWithFormat()
+                        ))
                         sheetState.hide()
                         onDismiss()
                     }
